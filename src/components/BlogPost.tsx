@@ -1,15 +1,24 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { blogPosts } from '../data/blogPosts';
+import { Seo } from './Seo';
+import { siteMetadata } from '../data/siteMetadata';
 
 export const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { pathname } = useLocation();
   const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) {
     return (
       <div className="min-h-screen bg-gray-50 font-mono text-gray-900 leading-relaxed">
+        <Seo
+          title="Post not found"
+          description="The blog post you're looking for doesn't exist."
+          path={pathname}
+          noindex
+        />
         <div className="max-w-2xl mx-auto px-6 py-12">
           <Link 
             to="/" 
@@ -25,8 +34,39 @@ export const BlogPost: React.FC = () => {
     );
   }
 
+  const canonicalPath = `/blog/${post.slug}`;
+  const publishedDate = new Date(post.date);
+  const publishedDateIso = Number.isNaN(publishedDate.getTime())
+    ? undefined
+    : publishedDate.toISOString();
+
+  const jsonLd: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    url: `${siteMetadata.siteUrl}${canonicalPath}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteMetadata.siteUrl}${canonicalPath}`,
+    },
+    author: {
+      '@type': 'Person',
+      name: siteMetadata.author,
+      url: siteMetadata.siteUrl,
+    },
+    datePublished: publishedDateIso,
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 font-mono text-gray-900 leading-relaxed">
+      <Seo
+        title={post.title}
+        description={post.excerpt}
+        path={canonicalPath}
+        type="article"
+        jsonLd={jsonLd}
+      />
       <div className="max-w-2xl mx-auto px-6 py-12">
         
         {/* Back Navigation */}
@@ -58,16 +98,16 @@ export const BlogPost: React.FC = () => {
                   return null;
                 }
                 return (
-                  <h1 key={index} className="text-lg font-normal mt-8 mb-4 first:mt-0">
+                  <h2 key={index} className="text-lg font-normal mt-8 mb-4 first:mt-0">
                     {headingText}
-                  </h1>
+                  </h2>
                 );
               }
               if (paragraph.startsWith('## ')) {
                 return (
-                  <h2 key={index} className="text-base font-medium mt-6 mb-4 text-gray-900 tracking-wide">
+                  <h3 key={index} className="text-base font-medium mt-6 mb-4 text-gray-900 tracking-wide">
                     {paragraph.replace('## ', '')}
-                  </h2>
+                  </h3>
                 );
               }
               

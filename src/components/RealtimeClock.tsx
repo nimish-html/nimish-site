@@ -12,7 +12,7 @@ export function RealtimeClock() {
   }, []);
 
   return (
-    <span className="text-gray-400 font-sans">
+    <span className="text-gray-400 font-sans" suppressHydrationWarning>
       (it's {currentTime.toLocaleTimeString('en-US', { 
         timeZone: 'Asia/Kolkata', 
         hour: '2-digit', 

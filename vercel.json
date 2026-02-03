@@ -1,0 +1,16 @@
+{
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.nimishbuilds.xyz"
+        }
+      ],
+      "destination": "https://nimishbuilds.xyz/:path*",
+      "permanent": true
+    }
+  ]
+}

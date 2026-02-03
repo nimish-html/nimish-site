@@ -1,14 +1,32 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import { BlogPost } from './components/BlogPost';
 import { ExperimentCard } from './components/ExperimentCard';
-import { HoverModal } from './components/HoverModal';
 import { RealtimeClock } from './components/RealtimeClock';
+import { Seo } from './components/Seo';
+import { siteMetadata } from './data/siteMetadata';
 import { blogPosts } from './data/blogPosts';
 
 function HomePage() {
+  const description =
+    "Marketer who taught himself to code, building AI agents and products like typesm.art. Based in Delhi, India.";
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: siteMetadata.author,
+    url: siteMetadata.siteUrl,
+    description,
+    sameAs: [
+      'https://x.com/anthropiast',
+      'https://github.com/nimish-html',
+      'https://www.linkedin.com/in/nimish-gahlot/',
+      'https://www.typesm.art/',
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 font-mono text-gray-900 leading-relaxed">
+      <Seo title={siteMetadata.title} description={description} path="/" jsonLd={jsonLd} />
       <div className="max-w-2xl mx-auto px-6 py-12">
         
         {/* Header */}
