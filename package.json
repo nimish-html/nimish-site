@@ -15,7 +15,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "firebase": "^12.9.0",
     "lucide-react": "^0.344.0",
+    "openai": "^6.22.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",

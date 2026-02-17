@@ -1,5 +1,6 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import { BlogPost } from './components/BlogPost';
+import { ChatPage } from './components/ChatPage';
 import { ExperimentCard } from './components/ExperimentCard';
 import { RealtimeClock } from './components/RealtimeClock';
 import { Seo } from './components/Seo';
@@ -28,13 +29,13 @@ function HomePage() {
     <div className="min-h-screen bg-gray-50 font-mono text-gray-900 leading-relaxed">
       <Seo title={siteMetadata.title} description={description} path="/" jsonLd={jsonLd} />
       <div className="max-w-2xl mx-auto px-6 py-12">
-        
+
         {/* Header */}
         <header className="mb-12">
           <div className="flex items-center gap-4 mb-4">
-            <img 
-              src="/me.png" 
-              alt="nimish gahlot" 
+            <img
+              src="/me.png"
+              alt="nimish gahlot"
               className="w-16 h-16 rounded-full object-cover"
             />
             <div>
@@ -72,8 +73,8 @@ function HomePage() {
             i graduated from iit bombay in 2021, since then i have been working closely with founders to scale their products.
           </p>
           <p className="text-sm leading-6">
-          last year, i took the leap of faith to start my own startup but realised that starting up as a non tech founder is a significant disadvantage.<br></br>
-          so i learnt how to code in the last 12 mos, and now i have my own app (typesm.art) and customers who pay to use my code :)
+            last year, i took the leap of faith to start my own startup but realised that starting up as a non tech founder is a significant disadvantage.<br></br>
+            so i learnt how to code in the last 12 mos, and now i have my own app (typesm.art) and customers who pay to use my code :)
           </p>
         </section>
 
@@ -88,10 +89,10 @@ function HomePage() {
           <p className="mb-6 text-sm leading-6">
             some explorations with ai
           </p>
-          
+
           <div className="space-y-4">
 
-          <ExperimentCard
+            <ExperimentCard
               title="PerfectSync"
               description="a tool that fixes audio errors of recorded videos. built with React, Anthropic and ElevenLabs."
               year="2025"
@@ -99,7 +100,7 @@ function HomePage() {
               previewAlt="perfectsync interface"
               url="https://preview--perfect-sync.lovable.app/"
             />
-          
+
 
             <ExperimentCard
               title="Bolt Hackathon Website"
@@ -109,7 +110,7 @@ function HomePage() {
               previewAlt="bolt hackathon website contest entry"
               url="https://bolt-hackathon-site.netlify.app/"
             />
-            
+
             <ExperimentCard
               title="SketchMind"
               description="a tool that translates live group calls into visualisations like flow charts and mind maps. built with React, OpenAI and MermaidJS."
@@ -132,7 +133,7 @@ function HomePage() {
           <p className="mb-6 text-sm leading-6">
             i blog about things i'm learning, my experiences, my thoughts on technology, and life.
           </p>
-          
+
           <div className="space-y-3">
             {blogPosts.map((post) => (
               <Link
@@ -181,7 +182,7 @@ function HomePage() {
         </section>
 
       </div>
-      
+
       {/* Signature Footer */}
       <footer className="max-w-2xl mx-auto px-6 pb-8">
         <div className="border-t border-gray-200 pt-6">
@@ -189,9 +190,9 @@ function HomePage() {
             <span className="text-xs text-gray-400">created with</span>
             <span className="text-xs text-gray-400">🤍</span>
             <span className="text-xs text-gray-400">by</span>
-            <img 
-              src="/nimish_signature_horizontal.png" 
-              alt="nimish signature" 
+            <img
+              src="/nimish_signature_horizontal.png"
+              alt="nimish signature"
               className="h-14 opacity-60 hover:opacity-80 transition-opacity duration-200"
             />
           </div>
@@ -205,6 +206,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/chat" element={<ChatPage />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
     </Routes>
   );
