@@ -12,6 +12,7 @@ export function ChatPage() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const [sessionId, setSessionId] = useState<string | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -47,6 +48,7 @@ export function ChatPage() {
 
             } catch (error) {
                 console.error("Error initializing session:", error);
+                setError("Failed to start chat. Please check your connection.");
             }
         };
 
@@ -60,6 +62,7 @@ export function ChatPage() {
         setMessages(prev => [...prev, userMessage]);
         setInput('');
         setLoading(true);
+        setError(null);
 
         try {
             // Save user message to Firestore
@@ -91,7 +94,7 @@ export function ChatPage() {
 
         } catch (error) {
             console.error('Chat error:', error);
-            // Fallback error message (optional)
+            setError("Failed to send message. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -156,6 +159,13 @@ export function ChatPage() {
                         <div className="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-none shadow-sm flex items-center gap-2">
                             <Loader2 className="w-4 h-4 animate-spin text-gray-400" />
                             <span className="text-xs text-gray-400">typing...</span>
+                        </div>
+                    </div>
+                )}
+                {error && (
+                    <div className="flex justify-center">
+                        <div className="bg-red-50 text-red-500 text-xs px-3 py-1 rounded-full">
+                            {error}
                         </div>
                     </div>
                 )}
