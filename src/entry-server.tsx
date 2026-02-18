@@ -5,7 +5,7 @@ import App from './App';
 import { ScrollToTop } from './components/ScrollToTop';
 import { blogPosts } from './data/blogPosts';
 
-export const prerenderRoutes = ['/', ...blogPosts.map(post => `/blog/${post.slug}`)];
+export const prerenderRoutes = ['/', '/chat', ...blogPosts.map(post => `/blog/${post.slug}`)];
 export const postMeta = blogPosts.map(post => ({
   slug: post.slug,
   date: post.date,
