@@ -38,7 +38,7 @@ export function ChatPage() {
                 // Initial greeting
                 const initialMessage: Message = {
                     role: 'assistant',
-                    content: "Hey! 👋 I'm Nimish's AI assistant. He builds AI systems that eliminate manual work for businesses. Quick question - what does your company do?"
+                    content: "before we start — what’s your name?"
                 };
 
                 setMessages([initialMessage]);
