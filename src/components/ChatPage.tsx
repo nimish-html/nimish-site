@@ -238,7 +238,7 @@ export function ChatPage() {
                 )}
                 {error && (
                     <div className="flex justify-center">
-                        <div className="bg-red-50 text-red-500 text-xs px-3 py-1 rounded-full flex items-center gap-2">
+                        <div className="bg-red-50 text-red-500 text-xs px-3 py-1 rounded-2xl flex items-center gap-2">
                             <span>{error}</span>
                             <button
                                 type="button"
@@ -279,7 +279,10 @@ export function ChatPage() {
                     <button
                         type="button"
                         aria-label="Send message"
-                        onClick={() => sendMessage(input)}
+                        onClick={() => {
+                            sendMessage(input);
+                            textareaRef.current?.focus();
+                        }}
                         onMouseDown={(e) => e.preventDefault()}
                         disabled={!input.trim() || loading}
                         className="bg-gray-900 text-white w-11 h-11 rounded-full hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
